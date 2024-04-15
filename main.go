@@ -1,10 +1,10 @@
 package main
 
 import (
-	"LogicLoop/Medium/Array"
+	"LogicLoop/Easy/Math"
 )
 
 func main() {
 	// 2024-04-14
-	Array.RotateTest()
+	Math.IsPalindromeTest()
 }
