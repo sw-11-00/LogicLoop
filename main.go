@@ -1,10 +1,10 @@
 package main
 
 import (
-	LinkedList2 "LogicLoop/Medium/LinkedList"
+	"LogicLoop/Easy/strings"
 )
 
 func main() {
 	// 2024-04-14
-	LinkedList2.ReverseLinkedListII()
+	strings.IsSubsequenceTest()
 }
