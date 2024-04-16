@@ -1,10 +1,10 @@
 package main
 
 import (
-	"LogicLoop/Easy/LinkedList"
+	LinkedList2 "LogicLoop/Medium/LinkedList"
 )
 
 func main() {
 	// 2024-04-14
-	LinkedList.ReverseLinkedListTest()
+	LinkedList2.ReverseLinkedListII()
 }
