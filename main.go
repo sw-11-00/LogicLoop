@@ -1,10 +1,10 @@
 package main
 
 import (
-	"LogicLoop/Easy/Math"
+	"LogicLoop/Easy/LinkedList"
 )
 
 func main() {
 	// 2024-04-14
-	Math.IsPalindromeTest()
+	LinkedList.ReverseLinkedListTest()
 }
