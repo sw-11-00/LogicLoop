@@ -29,5 +29,20 @@ func ReverseStrTest() {
 }
 
 func reverseStr(s string, k int) string {
-	return ""
+	a := []byte(s)
+	for i := 0; i < len(a); i += 2 * k {
+		sub := a[i:min(i+k, len(a))]
+		for j := 0; j < len(sub)/2; j++ {
+			sub[j], sub[len(sub)-j-1] = sub[len(sub)-j-1], sub[j]
+		}
+	}
+
+	return string(a)
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }

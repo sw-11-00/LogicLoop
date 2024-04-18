@@ -9,11 +9,9 @@ func ReverseWordsTest() {
 		input    string
 		expected string
 	}{
-		{"hello world", "olleh dlrow"},
-		{"  hello world  ", "  olleh dlrow  "},
-		{"a b c", "a b c"},
-		{"Example   good", "elpmaxE   doog"},
-		{"", ""},
+		{"the sky is blue", "blue is sky the"},
+		{"  hello world  ", "world hello"},
+		{"a good   example", "example good a"},
 	}
 
 	for _, tc := range testCases {
@@ -27,5 +25,23 @@ func ReverseWordsTest() {
 }
 
 func reverseWords(s string) string {
-
+	res := ""
+	a := []byte(s)
+	for slow, fast := len(a)-1, len(a)-1; fast > 0; {
+		for slow >= 0 && a[slow] == ' ' {
+			slow--
+		}
+		fast = slow
+		for fast >= 0 && a[fast] != ' ' {
+			fast--
+		}
+		if fast == slow {
+			break
+		}
+		res = res + string(a[fast+1:slow+1])
+		res = res + " "
+		slow = fast
+	}
+	res = res[0 : len(res)-1]
+	return res
 }
