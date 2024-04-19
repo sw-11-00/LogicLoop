@@ -1,10 +1,10 @@
 package main
 
 import (
-	"LogicLoop/Medium/Array"
+	"LogicLoop/Medium/dp"
 )
 
 func main() {
 	// 2024-04-14
-	Array.CanJumpTest()
+	dp.MaxProductTest()
 }
