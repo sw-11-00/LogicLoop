@@ -1,10 +1,10 @@
 package main
 
 import (
-	"LogicLoop/Medium/dp"
+	"LogicLoop/Medium/Array"
 )
 
 func main() {
 	// 2024-04-14
-	dp.MaxProductTest()
+	Array.LongestConsecutiveTest()
 }
