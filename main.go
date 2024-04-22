@@ -6,5 +6,5 @@ import (
 
 func main() {
 	// 2024-04-14
-	Array.LongestConsecutiveTest()
+	Array.FourSumCountTest()
 }
