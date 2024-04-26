@@ -47,8 +47,10 @@ func QuickSort1(nums []int, start, end int) {
 	}
 }
 
+// pay attention to the boundary problem of quick sorting
 func partition(nums []int, low, high int) int {
 	pivot := nums[low]
+	// **
 	for low < high {
 		for low < high && nums[high] >= pivot {
 			high--
