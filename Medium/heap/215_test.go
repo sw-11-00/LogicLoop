@@ -2,9 +2,10 @@ package heap
 
 import (
 	"fmt"
+	"testing"
 )
 
-func FindKthLargestTest() {
+func TestFindKthLargest(t *testing.T) {
 	testCases := []struct {
 		nums     []int
 		k        int
