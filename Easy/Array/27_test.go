@@ -55,6 +55,5 @@ func removeElement3(nums []int, val int) int {
 			i++
 		}
 	}
-
 	return i
 }
