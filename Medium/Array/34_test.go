@@ -58,7 +58,7 @@ func TestSearchRange(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			actual := searchRange1(tc.nums, tc.target)
+			actual := searchRange(tc.nums, tc.target)
 			if !reflect.DeepEqual(actual, tc.expected) {
 				t.Errorf("Test '%s' failed: expected %v, got %v", tc.name, tc.expected, actual)
 			}
@@ -67,36 +67,6 @@ func TestSearchRange(t *testing.T) {
 }
 
 func searchRange(nums []int, target int) []int {
-	result := make([]int, 2)
-	result[0], result[1] = -1, -1
-	if len(nums) == 0 {
-		return result
-	}
-	for i, j := 0, len(nums)-1; i <= j; {
-		mid := (i + j) / 2
-		if nums[mid] > target {
-			j = mid - 1
-		} else if nums[mid] < target {
-			i = mid + 1
-		} else if nums[mid] == target {
-			i = mid
-			for i > 0 && nums[i-1] == nums[i] {
-				i--
-			}
-			result[0] = i
-			j = mid
-			for j+1 < len(nums) && nums[j+1] == nums[j] {
-				j++
-			}
-			result[1] = j
-			return result
-		}
-	}
-
-	return result
-}
-
-func searchRange1(nums []int, target int) []int {
 	result := make([]int, 2)
 	result[0], result[1] = -1, -1
 	if len(nums) == 0 {

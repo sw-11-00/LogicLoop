@@ -1,31 +1,31 @@
 package Array
 
 import (
-	"fmt"
 	"reflect"
 	"sort"
+	"testing"
 )
 
-func FourSumTest() {
-	testCases := []struct {
+func TestFourSum(t *testing.T) {
+	tests := []struct {
+		name     string
 		nums     []int
 		target   int
 		expected [][]int
 	}{
-		{[]int{2, 2, 2, 2, 2}, 8, [][]int{{2, 2, 2, 2}}},
-		{[]int{-3, -1, 0, 2, 4, 5}, 0, [][]int{{-3, -1, 0, 4}}},
-		{[]int{0, 0, 0, 0}, 1, nil},
-		{[]int{0, 0, 0, 0}, 0, [][]int{{0, 0, 0, 0}}},
-		{[]int{-5, -4, -3, -2, 1, 3, 3, 5}, 0, [][]int{{-5, -4, 3, 6}, {-5, -3, 3, 5}}},
+		{"less than four elements", []int{1, 2, 3}, 6, [][]int{}},
+		{"four elements", []int{1, 2, 3, 4}, 10, [][]int{{1, 2, 3, 4}}},
+		{"multiple elements", []int{1, 0, -1, 0, -2, 2}, 0, [][]int{{-2, -1, 1, 2}, {-2, 0, 0, 2}, {-1, 0, 0, 1}}},
+		{"no solution", []int{1, 2, 3, 4, 5}, 100, [][]int{}},
 	}
 
-	for _, tc := range testCases {
-		result := fourSum(tc.nums, tc.target)
-		if reflect.DeepEqual(normalize(result), normalize(tc.expected)) {
-			fmt.Printf("Test Passed for nums %v and target %d: Expected and got %v\n", tc.nums, tc.target, result)
-		} else {
-			fmt.Printf("Test Failed for nums %v and target %d: Expected %v, Got %v\n", tc.nums, tc.target, tc.expected, result)
-		}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := fourSum(tt.nums, tt.target)
+			if !reflect.DeepEqual(result, tt.expected) {
+				t.Errorf("got %v, want %v", result, tt.expected)
+			}
+		})
 	}
 }
 

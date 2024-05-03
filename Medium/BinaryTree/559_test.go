@@ -74,10 +74,7 @@ func NaryMaxDepth(root *Node) int {
 
 	childMaxDepth := 0
 	for _, child := range root.Children {
-		maxDepth := NaryMaxDepth(child)
-		if maxDepth > childMaxDepth {
-			childMaxDepth = maxDepth
-		}
+		childMaxDepth = max(childMaxDepth, NaryMaxDepth(child))
 	}
 
 	return childMaxDepth + 1
