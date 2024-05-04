@@ -42,20 +42,18 @@ func TestIntersection(t *testing.T) {
 }
 
 func intersection(nums1 []int, nums2 []int) []int {
-	numMap := make(map[int]int, len(nums1)+len(nums2))
-	numSet := make(map[int]bool, len(nums1)+len(nums2))
-	ans := make([]int, 0)
+	res := make([]int, 0)
+	numMap := make(map[int]int, len(nums1))
 	for _, num := range nums1 {
-		numMap[num] += 1
-		numSet[num] = true
+		numMap[num] = 1
 	}
 
 	for _, num := range nums2 {
-		if numMap[num] > 0 && numSet[num] == true {
-			ans = append(ans, num)
-			numSet[num] = false
+		if numMap[num] == 1 {
+			res = append(res, num)
+			numMap[num] = 0
 		}
 	}
 
-	return ans
+	return res
 }

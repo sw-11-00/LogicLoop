@@ -1,6 +1,7 @@
 package Array
 
 import (
+	"sort"
 	"testing"
 )
 
@@ -38,22 +39,24 @@ func TestMajorityElement(t *testing.T) {
 }
 
 func majorityElement(nums []int) int {
-	if len(nums) == 0 {
-		return 0
-	}
-
-	numMap := map[int]int{}
-	for _, num := range nums {
-		numMap[num]++
-	}
-
-	maxElement := numMap[nums[0]]
-	ans := nums[0]
-	for _, num := range nums {
-		if numMap[num] > maxElement {
-			maxElement = numMap[num]
-			ans = num
+	cd := nums[0]
+	cnt := 1
+	l := len(nums)
+	for i := 1; i < l; i++ {
+		if nums[i] == cd {
+			cnt++
+		} else {
+			cnt--
+			if cnt == 0 {
+				cd = nums[i]
+				cnt = 1
+			}
 		}
 	}
-	return ans
+	return cd
+}
+
+func majorityElement1(nums []int) int {
+	sort.Ints(nums)
+	return nums[len(nums)/2]
 }

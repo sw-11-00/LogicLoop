@@ -54,5 +54,28 @@ func TestRotateRight(t *testing.T) {
 }
 
 func rotateRight(head *ListNode, k int) *ListNode {
-	return nil
+	if head == nil {
+		return nil
+	}
+
+	length := 1
+	tail := head
+	for tail.Next != nil {
+		tail = tail.Next
+		length++
+	}
+
+	k = k % length
+	if k == 0 {
+		return head
+	}
+
+	tail.Next = head
+	for i := 0; i < length-k; i++ {
+		tail = tail.Next
+	}
+
+	newHead := tail.Next
+	tail.Next = nil
+	return newHead
 }

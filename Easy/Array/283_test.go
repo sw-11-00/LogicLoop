@@ -39,15 +39,17 @@ func TestMoveZeroes(t *testing.T) {
 }
 
 func moveZeroes(nums []int) {
-	i := 0
-	for _, num := range nums {
-		if num != 0 {
-			nums[i] = num
-			i++
+	var i, j int
+	for i < len(nums) {
+		if nums[i] != 0 {
+			nums[j] = nums[i]
+			j++
 		}
+		i++
 	}
 
-	for ; i < len(nums); i++ {
-		nums[i] = 0
+	for j < len(nums) {
+		nums[j] = 0
+		j++
 	}
 }
