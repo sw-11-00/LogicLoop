@@ -30,22 +30,29 @@ func TestAddStrings(t *testing.T) {
 }
 
 func addStrings(num1 string, num2 string) string {
-	ans := ""
-	add := 0
 	if len(num1) == 0 && len(num2) == 0 {
 		return "0"
 	}
-	for i, j := len(num1)-1, len(num2)-1; i >= 0 || j >= 0 || add > 0; i, j = i-1, j-1 {
-		var x, y int
+	ans := ""
+	carry := 0
+	i, j := len(num1)-1, len(num2)-1
+	for i >= 0 || j >= 0 {
+		x, y := 0, 0
 		if i >= 0 {
 			x = int(num1[i]) - '0'
 		}
 		if j >= 0 {
 			y = int(num2[j]) - '0'
 		}
-		sum := x + y + add
+		sum := x + y + carry
+		carry = sum / 10
 		ans = strconv.Itoa(sum%10) + ans
-		add = sum / 10
+		i--
+		j--
+	}
+
+	if carry != 0 {
+		ans = strconv.Itoa(carry) + ans
 	}
 
 	return ans

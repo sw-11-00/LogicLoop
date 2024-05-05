@@ -49,13 +49,13 @@ func sortSlices(s [][]int) {
 
 func combinationSum2(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
-	var result [][]int
-	var backpack func(comb []int, start, target int)
-	backpack = func(comb []int, start, target int) {
+	var res [][]int
+	var backtrack func(start, target int, path []int)
+	backtrack = func(start, target int, path []int) {
 		if target == 0 {
-			temp := make([]int, len(comb))
-			copy(temp, comb)
-			result = append(result, temp)
+			temp := make([]int, len(path))
+			copy(temp, path)
+			res = append(res, temp)
 			return
 		}
 
@@ -63,11 +63,10 @@ func combinationSum2(candidates []int, target int) [][]int {
 			if i > start && candidates[i] == candidates[i-1] {
 				continue
 			}
-			backpack(append(comb, candidates[i]), i+1, target-candidates[i])
+			backtrack(i+1, target-candidates[i], append(path, candidates[i]))
 		}
 	}
 
-	backpack([]int{}, 0, target)
-
-	return result
+	backtrack(0, target, []int{})
+	return res
 }

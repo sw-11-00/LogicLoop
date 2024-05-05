@@ -20,7 +20,6 @@ func TestCombine(t *testing.T) {
 	for _, tt := range tests {
 		t.Run("Combine", func(t *testing.T) {
 			got := combine(tt.n, tt.k)
-			// Since the order of the combinations may vary, we need to sort them before comparing
 			sortSliceOfSlices(got)
 			sortSliceOfSlices(tt.want)
 			if !reflect.DeepEqual(got, tt.want) {

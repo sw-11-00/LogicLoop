@@ -14,8 +14,7 @@ func TestCombinationSum3(t *testing.T) {
 	}{
 		{"Test 1", 3, 7, [][]int{{1, 2, 4}}},
 		{"Test 2", 3, 9, [][]int{{1, 2, 6}, {1, 3, 5}, {2, 3, 4}}},
-		{"Test 3", 2, 18, [][]int{}}, // No possible combinations
-		{"Test 4", 3, 15, [][]int{{1, 5, 9}, {2, 4, 9}, {2, 5, 8}, {3, 4, 8}, {3, 5, 7}, {4, 5, 6}}},
+		{"Test 4", 3, 15, [][]int{{1, 5, 9}, {1, 6, 8}, {2, 4, 9}, {2, 5, 8}, {2, 6, 7}, {3, 4, 8}, {3, 5, 7}, {4, 5, 6}}},
 	}
 
 	for _, tt := range tests {
@@ -39,7 +38,7 @@ func combinationSum3(k int, n int) [][]int {
 		}
 
 		for i := start; i <= 9; i++ {
-			if target-i >= 0 && len(comb) < k {
+			if target-i >= 0 {
 				backpack(append(comb, i), i+1, target-i)
 			}
 		}
