@@ -19,20 +19,22 @@ func TestHammingDistance(t *testing.T) {
 	}
 
 	for _, tt := range testCases {
-		result := hammingDistance(tt.x, tt.y)
+		result := hammingDistance1(tt.x, tt.y)
 		if result != tt.expect {
 			t.Errorf("hammingDistance(%v, %v) = %v; want %v", tt.x, tt.y, result, tt.expect)
 		}
 	}
 }
 
-func hammingDistance(x int, y int) int {
-	distance := 0
-	xory := x ^ y
-	for xory > 0 {
-		distance += xory & 1
-		xory >>= 1
+func hammingDistance1(x int, y int) int {
+	count := 0
+	for x > 0 || y > 0 {
+		a := x & 1
+		b := y & 1
+		count += a ^ b
+		x >>= 1
+		y >>= 1
 	}
 
-	return distance
+	return count
 }

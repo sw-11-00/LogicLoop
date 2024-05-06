@@ -20,7 +20,7 @@ func TestRangeBitwiseAnd(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := rangeBitwiseAnd1(tt.left, tt.right)
+			got := rangeBitwiseAnd(tt.left, tt.right)
 			if got != tt.want {
 				t.Errorf("%s failed: got %v, want %v", tt.name, got, tt.want)
 			}
@@ -37,11 +37,4 @@ func rangeBitwiseAnd(left int, right int) int {
 	}
 
 	return left << shift
-}
-
-func rangeBitwiseAnd1(left int, right int) int {
-	for left < right {
-		right = right & (right - 1)
-	}
-	return right
 }

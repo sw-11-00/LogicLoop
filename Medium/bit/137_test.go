@@ -18,7 +18,7 @@ func TestSingleNumber(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := singleNumber(tt.nums)
+			got := singleNumber3(tt.nums)
 			if got != tt.want {
 				t.Errorf("%s failed: got %v, want %v", tt.name, got, tt.want)
 			}
@@ -38,4 +38,21 @@ func singleNumber(nums []int) int {
 		}
 	}
 	return 0
+}
+
+func singleNumber3(nums []int) int {
+	var result int
+	for i := 0; i < 32; i++ {
+		sum := 0
+		for _, num := range nums {
+			sum += (num >> i) & 1
+		}
+		if sum%3 != 0 {
+			result |= 1 << i
+		}
+	}
+	if result >= (1 << 31) {
+		result -= 1 << 32
+	}
+	return result
 }

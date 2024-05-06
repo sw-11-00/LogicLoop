@@ -23,7 +23,7 @@ func TestMyPow(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := myPow(tt.x, tt.n)
+			got := myPow1(tt.x, tt.n)
 			if !closeEnough(got, tt.want) {
 				t.Errorf("myPow(%v, %d) = %v, want %v", tt.x, tt.n, got, tt.want)
 			}
@@ -31,23 +31,26 @@ func TestMyPow(t *testing.T) {
 	}
 }
 
-func myPow(x float64, n int) float64 {
+func myPow1(x float64, n int) float64 {
 	if n < 0 {
 		x = 1 / x
 		n = -n
 	}
 
-	pow := 1.0
-	for n > 0 {
-		if n&1 == 1 {
-			pow *= x
-		}
+	return fastPow(x, n)
+}
 
-		x *= x
-		n >>= 1
+func fastPow(x float64, n int) float64 {
+	if n == 0 {
+		return 1
 	}
 
-	return pow
+	half := fastPow(x, n/2)
+	if n%2 == 0 {
+		return half * half
+	}
+
+	return half * half * x
 }
 
 func closeEnough(a, b float64) bool {
