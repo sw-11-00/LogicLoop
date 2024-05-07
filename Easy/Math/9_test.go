@@ -61,28 +61,26 @@ func isPalindrome(x int) bool {
 	if x < 0 {
 		return false
 	}
-
-	nums := digitsToArray(x)
-	for i, j := 0, len(nums)-1; i < j; i, j = i+1, j-1 {
-		if nums[i] != nums[j] {
+	digits := digitToArray(x)
+	for i, j := 0, len(digits)-1; i < j; {
+		if digits[i] != digits[j] {
 			return false
 		}
+		i++
+		j--
 	}
 
 	return true
 }
 
-func digitsToArray(num int) []int {
-	if num == 0 {
-		return []int{0}
+func digitToArray(x int) []int {
+	var ans []int
+	i := 0
+	for x > 0 {
+		ans = append(ans, x%10)
+		x /= 10
+		i++
 	}
 
-	nums := make([]int, 0)
-
-	for num > 0 {
-		nums = append(nums, num%10)
-		num /= 10
-	}
-
-	return nums
+	return ans
 }

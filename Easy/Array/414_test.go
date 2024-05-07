@@ -35,6 +35,11 @@ func TestThirdMax(t *testing.T) {
 			nums: []int{1, 1, 2, 2, 3, 3},
 			want: 1,
 		},
+		{
+			name: "Test6",
+			nums: []int{1, 2, -2147483648},
+			want: -2147483648,
+		},
 	}
 
 	for _, tt := range tests {
@@ -46,29 +51,23 @@ func TestThirdMax(t *testing.T) {
 	}
 }
 func thirdMax(nums []int) int {
-	first := -1 << 63
-	second := -1 << 63
-	third := -1 << 63
-
+	max1, max2, max3 := -1<<31-1, -1<<31-1, -1<<31-1
 	for _, num := range nums {
-		if num == first || num == second || num == third {
-			continue
-		}
-		if num > first {
-			third = second
-			second = first
-			first = num
-		} else if num > second {
-			third = second
-			second = num
-		} else if num > third {
-			third = num
+		if num > max1 {
+			max3 = max2
+			max2 = max1
+			max1 = num
+		} else if num > max2 && num < max1 {
+			max3 = max2
+			max2 = num
+		} else if num > max3 && num < max2 {
+			max3 = num
 		}
 	}
 
-	if third == -1<<63 {
-		return first
+	if max3 == -1<<31-1 {
+		return max1
 	}
 
-	return third
+	return max3
 }

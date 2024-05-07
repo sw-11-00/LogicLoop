@@ -56,15 +56,14 @@ func isPalindrome(s string) bool {
 	i := 0
 	j := len(s) - 1
 	for i < j {
-		if !valid(s[i]) {
+		if !isValid(s[i]) {
 			i++
 			continue
 		}
-		if !valid(s[j]) {
+		if !isValid(s[j]) {
 			j--
 			continue
 		}
-
 		if s[i] != s[j] {
 			return false
 		}
@@ -73,4 +72,8 @@ func isPalindrome(s string) bool {
 	}
 
 	return true
+}
+
+func isValid(c byte) bool {
+	return (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9')
 }

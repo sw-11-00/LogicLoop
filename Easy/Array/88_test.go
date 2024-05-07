@@ -51,33 +51,34 @@ func TestMergeSortedArray(t *testing.T) {
 }
 
 func merge1(nums1 []int, m int, nums2 []int, n int) {
-	if n == 0 {
+	if nums2 == nil {
 		return
 	}
 
-	if m == 0 {
+	if nums1 == nil {
 		copy(nums1, nums2)
 		return
 	}
 
-	nums0 := make([]int, 0, len(nums1))
+	nums0 := make([]int, len(nums1))
 	i := 0
 	j := 0
-	for k := 0; k < len(nums1) && i < m && j < n; k++ {
-		if nums1[i] <= nums2[j] {
-			nums0 = append(nums0, nums1[i])
+	k := 0
+	for ; k < len(nums1) && i < m && j < n; k++ {
+		if nums1[i] < nums2[j] {
+			nums0[k] = nums1[i]
 			i++
 		} else {
-			nums0 = append(nums0, nums2[j])
+			nums0[k] = nums2[j]
 			j++
 		}
 	}
 
-	if i == m {
-		nums0 = append(nums0, nums2[j:]...)
+	if i < m {
+		nums0 = append(nums0[:k], nums1[i:]...)
 	}
-	if j == n {
-		nums0 = append(nums0, nums1[i:]...)
+	if j < n {
+		nums0 = append(nums0[:k], nums2[j:]...)
 	}
 
 	copy(nums1, nums0)

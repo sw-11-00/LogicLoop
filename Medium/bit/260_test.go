@@ -18,7 +18,7 @@ func TestSingleNumber1(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := singleNumber1(tt.nums)
+			got := singleNumber2(tt.nums)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("singleNumber1() = %v, want %v", got, tt.want)
 			}
@@ -39,4 +39,27 @@ func singleNumber1(nums []int) []int {
 		}
 	}
 	return res
+}
+
+func singleNumber2(nums []int) []int {
+	xor := 0
+	for _, num := range nums {
+		xor ^= num
+	}
+
+	mask := 1
+	for (mask & xor) == 0 {
+		mask <<= 1
+	}
+
+	a, b := 0, 0
+	for _, num := range nums {
+		if (mask & num) == 0 {
+			a ^= num
+		} else {
+			b ^= num
+		}
+	}
+
+	return []int{a, b}
 }

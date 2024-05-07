@@ -36,26 +36,35 @@ func TestMerge(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := merge(tt.intervals); !reflect.DeepEqual(got, tt.want) {
+			if got := merge1(tt.intervals); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("merge() = %v, want %v", got, tt.want)
 			}
 		})
 	}
 }
 
-func merge(intervals [][]int) [][]int {
+func merge1(intervals [][]int) [][]int {
 	sort.Slice(intervals, func(i, j int) bool {
 		return intervals[i][0] < intervals[j][0]
 	})
 
-	merged := make([][]int, 0)
-	for _, interval := range intervals {
-		if len(merged) == 0 || merged[len(merged)-1][1] < interval[0] {
-			merged = append(merged, interval)
+	var merged [][]int
+	merged = append(merged, intervals[0])
+	for i := 1; i < len(intervals); i++ {
+		if merged[len(merged)-1][1] < intervals[i][0] {
+			merged = append(merged, intervals[i])
 		} else {
-			merged[len(merged)-1][1] = max(merged[len(merged)-1][1], interval[1])
+			merged[len(merged)-1][1] = max(merged[len(merged)-1][1], intervals[i][1])
 		}
 	}
 
 	return merged
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+
+	return b
 }

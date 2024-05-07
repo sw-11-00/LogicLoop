@@ -43,17 +43,14 @@ func TestRemoveDuplicates(t *testing.T) {
 }
 
 func removeDuplicates1(nums []int) int {
-	if len(nums) == 0 {
-		return 0
-	}
-
-	i := 0
-	for j := 1; j < len(nums); j++ {
-		if nums[i] != nums[j] {
-			i++
-			nums[i] = nums[j]
+	k := 0
+	for i, num := range nums {
+		if i+1 < len(nums) && nums[i] == nums[i+1] {
+			continue
 		}
+		nums[k] = num
+		k++
 	}
 
-	return i + 1
+	return k
 }
