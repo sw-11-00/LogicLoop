@@ -47,17 +47,14 @@ func TestJump(t *testing.T) {
 }
 
 func jump(nums []int) int {
-	end := 0
-	maxPosition := 0
-	steps := 0
-
-	for i := 0; i < len(nums)-1; i++ {
-		maxPosition = max(maxPosition, i+nums[i])
-		if i == end {
-			end = maxPosition
-			steps++
+	dp := make([]int, len(nums))
+	for i := 1; i < len(nums); i++ {
+		dp[i] = len(nums)
+		for j := 0; j < i; j++ {
+			if j+nums[j] >= i {
+				dp[i] = min(dp[i], dp[j]+1)
+			}
 		}
 	}
-
-	return steps
+	return dp[len(nums)-1]
 }

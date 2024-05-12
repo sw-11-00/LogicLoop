@@ -39,7 +39,7 @@ func TestReverseWords(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := reverseWords1(tt.s); got != tt.want {
+			if got := reverseWords(tt.s); got != tt.want {
 				t.Errorf("reverseWords() = %v, want %v", got, tt.want)
 			}
 		})
@@ -47,32 +47,11 @@ func TestReverseWords(t *testing.T) {
 }
 
 func reverseWords(s string) string {
-	res := ""
-	a := []byte(s)
-	for slow, fast := len(a)-1, len(a)-1; fast > 0; {
-		for slow >= 0 && a[slow] == ' ' {
-			slow--
-		}
-		fast = slow
-		for fast >= 0 && a[fast] != ' ' {
-			fast--
-		}
-		if fast == slow {
-			break
-		}
-		res = res + string(a[fast+1:slow+1])
-		res = res + " "
-		slow = fast
-	}
-	res = res[0 : len(res)-1]
-	return res
-}
-
-func reverseWords1(s string) string {
 	sByte := []byte(s)
-	fast := len(s) - 1
-	slow := len(s) - 1
+	fast := len(sByte) - 1
+	slow := len(sByte) - 1
 	res := ""
+
 	for fast >= 0 {
 		for fast >= 0 && sByte[fast] == ' ' {
 			fast--
@@ -82,15 +61,16 @@ func reverseWords1(s string) string {
 		if fast == -1 {
 			break
 		}
-
 		slow = fast
+
 		for fast >= 0 && sByte[fast] != ' ' {
 			fast--
 		}
-		res = res + string(sByte[fast+1:slow+1])
-		res = res + " "
-		slow = fast - 1
-		fast = slow
+
+		res += string(sByte[fast+1 : slow+1])
+		res += " "
+		fast--
+		slow = fast
 	}
 
 	return res[:len(res)-1]

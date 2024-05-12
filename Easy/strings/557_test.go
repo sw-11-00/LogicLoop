@@ -34,31 +34,11 @@ func TestReverseWords(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := reverseWords(tt.s); got != tt.want {
+			if got := reverseWords1(tt.s); got != tt.want {
 				t.Errorf("reverseWords() = %v, want %v", got, tt.want)
 			}
 		})
 	}
-}
-
-func reverseWords(s string) string {
-	sByte := []byte(s)
-	i := 0
-	var ansByte []byte
-	for j := 0; j <= len(sByte); {
-		if j < len(sByte) && sByte[j] != ' ' {
-			j++
-			continue
-		}
-
-		ans := reverse(sByte[i:j])
-		ansByte = append(ansByte, ans...)
-		ansByte = append(ansByte, ' ')
-		i = j + 1
-		j = j + 1
-	}
-
-	return string(ansByte[:len(ansByte)-1])
 }
 
 func reverse(s []byte) []byte {
@@ -69,4 +49,24 @@ func reverse(s []byte) []byte {
 	}
 
 	return s
+}
+
+func reverseWords1(s string) string {
+	sByte := []byte(s)
+	res := ""
+	j := 0
+	i := 0
+	for i <= len(sByte) {
+		if i < len(sByte) && sByte[i] != ' ' {
+			i++
+			continue
+		}
+
+		res += string(reverse(sByte[j:i]))
+		res += " "
+		j = i + 1
+		i = i + 1
+	}
+
+	return res[:len(res)-1]
 }

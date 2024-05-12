@@ -49,34 +49,36 @@ func TestGenerateMatrix(t *testing.T) {
 }
 
 func generateMatrix(n int) [][]int {
-	l, r, t, b := 0, n-1, 0, n-1
-	num := 1
-	res := make([][]int, n)
-	for i := range res {
-		res[i] = make([]int, n)
-	}
-	for num <= n*n {
-		for i := l; i <= r; i++ {
-			res[t][i] = num
-			num++
-		}
-		t++
-		for i := t; i <= b; i++ {
-			res[i][r] = num
-			num++
-		}
-		r--
-		for i := r; i >= l; i-- {
-			res[b][i] = num
-			num++
-		}
-		b--
-		for i := b; i >= t; i-- {
-			res[i][l] = num
-			num++
-		}
-		l++
+	left, right, low, high := 0, n-1, 0, n-1
+	matrix := make([][]int, n)
+	for i := range matrix {
+		matrix[i] = make([]int, n)
 	}
 
-	return res
+	num := 1
+
+	for num <= n*n {
+		for i := left; i <= right; i++ {
+			matrix[low][i] = num
+			num++
+		}
+		low++
+		for i := low; i <= high; i++ {
+			matrix[i][right] = num
+			num++
+		}
+		right--
+		for i := right; i >= left; i-- {
+			matrix[high][i] = num
+			num++
+		}
+		high--
+		for i := high; i >= low; i-- {
+			matrix[i][left] = num
+			num++
+		}
+		left++
+	}
+
+	return matrix
 }

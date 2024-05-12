@@ -113,7 +113,6 @@ func addTwoNumbers1(l1 *ListNode, l2 *ListNode) *ListNode {
 		}
 
 		sum := a + b + carry
-		carry = sum / 10
 		if head == nil {
 			head = &ListNode{Val: sum % 10}
 			tail = head
@@ -121,6 +120,7 @@ func addTwoNumbers1(l1 *ListNode, l2 *ListNode) *ListNode {
 			tail.Next = &ListNode{Val: sum % 10}
 			tail = tail.Next
 		}
+		carry = sum / 10
 	}
 
 	if carry != 0 {

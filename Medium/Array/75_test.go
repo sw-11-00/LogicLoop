@@ -35,7 +35,7 @@ func TestSortColors(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sortColors(tt.nums)
+			sortColors1(tt.nums)
 			if !reflect.DeepEqual(tt.nums, tt.want) {
 				t.Errorf("sortColors() got %v, want %v", tt.nums, tt.want)
 			}
@@ -43,19 +43,20 @@ func TestSortColors(t *testing.T) {
 	}
 }
 
-func sortColors(nums []int) {
-	low, mid, high := 0, 0, len(nums)-1
-	for mid <= high {
-		switch nums[mid] {
-		case 0:
-			nums[low], nums[mid] = nums[mid], nums[low]
-			low++
+func sortColors1(nums []int) {
+	start := 0
+	mid := 0
+	end := len(nums) - 1
+	for mid <= end {
+		if nums[mid] == 0 {
+			nums[start], nums[mid] = nums[mid], nums[start]
 			mid++
-		case 1:
+			start++
+		} else if nums[mid] == 1 {
 			mid++
-		case 2:
-			nums[mid], nums[high] = nums[high], nums[mid]
-			high--
+		} else if nums[mid] == 2 {
+			nums[mid], nums[end] = nums[end], nums[mid]
+			end--
 		}
 	}
 }
