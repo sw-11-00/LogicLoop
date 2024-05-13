@@ -48,20 +48,20 @@ func TestProductExceptSelf(t *testing.T) {
 }
 
 func productExceptSelf(nums []int) []int {
-	ans := make([]int, len(nums)) // 创建一个与 nums 等长的新数组
-
-	// 将新数组的所有元素初始化为1
+	ans := make([]int, len(nums))
 	for i := range ans {
 		ans[i] = 1
 	}
 
-	beforeSum := 1
-	afterSum := 1
-	for i, j := 0, len(nums)-1; i < len(nums); {
-		ans[i] *= beforeSum
-		ans[j] *= afterSum
-		beforeSum *= nums[i]
-		afterSum *= nums[j]
+	leftSum := 1
+	rightSum := 1
+	for i, j := 0, len(nums)-1; i <= len(nums)-1; {
+		ans[i] *= leftSum
+		ans[j] *= rightSum
+
+		leftSum *= nums[i]
+		rightSum *= nums[j]
+
 		i++
 		j--
 	}
