@@ -45,7 +45,7 @@ func TestRotateRight(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := rotateRight(tt.head, tt.k)
+			got := rotateRight1(tt.head, tt.k)
 			if !isEqual(got, tt.want) {
 				t.Errorf("rotateRight() = %v, want %v", got, tt.want)
 			}
@@ -53,7 +53,7 @@ func TestRotateRight(t *testing.T) {
 	}
 }
 
-func rotateRight(head *ListNode, k int) *ListNode {
+func rotateRight1(head *ListNode, k int) *ListNode {
 	if head == nil {
 		return nil
 	}
@@ -65,7 +65,7 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		length++
 	}
 
-	k = k % length
+	k %= length
 	if k == 0 {
 		return head
 	}
@@ -77,5 +77,6 @@ func rotateRight(head *ListNode, k int) *ListNode {
 
 	newHead := tail.Next
 	tail.Next = nil
+
 	return newHead
 }

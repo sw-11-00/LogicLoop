@@ -2,9 +2,10 @@ package dp
 
 import (
 	"fmt"
+	"testing"
 )
 
-func FindNumberOfLISTest() {
+func TestFindNumberOfLIS(t *testing.T) {
 	testCases := []struct {
 		nums     []int
 		expected int

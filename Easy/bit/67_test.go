@@ -27,25 +27,6 @@ func TestAddBinary(t *testing.T) {
 	}
 }
 
-func addBinary1(a string, b string) string {
-	ans := ""
-	add := 0
-	for i, j := len(a)-1, len(b)-1; i >= 0 || j >= 0 || add > 0; i, j = i-1, j-1 {
-		var x, y int
-		if i >= 0 {
-			x = int(a[i]) - '0'
-		}
-		if j >= 0 {
-			y = int(b[j]) - '0'
-		}
-		add += x + y
-		ans = strconv.Itoa(add&1) + ans
-		add >>= 1
-	}
-
-	return ans
-}
-
 func addBinary(a string, b string) string {
 	if len(a) == 0 && len(b) == 0 {
 		return "0"

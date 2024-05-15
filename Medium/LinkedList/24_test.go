@@ -50,14 +50,15 @@ func listToSlice(head *ListNode) []int {
 
 func swapPairs(head *ListNode) *ListNode {
 	dummy := &ListNode{Next: head}
-	current := dummy
-	for current.Next != nil && current.Next.Next != nil {
-		first := current.Next
-		second := current.Next.Next
+	prev := dummy
+	for prev.Next != nil && prev.Next.Next != nil {
+		first := prev.Next
+		second := prev.Next.Next
 		first.Next = second.Next
-		current.Next = second
-		current.Next.Next = first
-		current = current.Next.Next
+		prev.Next = second
+		second.Next = first
+		prev = first
 	}
+
 	return dummy.Next
 }

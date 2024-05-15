@@ -69,7 +69,7 @@ func TestFlatten(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			flatten(tt.root)
+			flatten2(tt.root)
 		})
 	}
 }
@@ -96,4 +96,50 @@ func flatten(root *common.TreeNode) {
 	}
 
 	return
+}
+
+func flatten1(root *common.TreeNode) {
+	if root == nil {
+		return
+	}
+
+	stack := []*common.TreeNode{root}
+	var prev *common.TreeNode
+
+	for len(stack) > 0 {
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+
+		if prev != nil {
+			prev.Right = node
+			prev.Left = nil
+		}
+
+		if node.Right != nil {
+			stack = append(stack, node.Right)
+		}
+
+		if node.Left != nil {
+			stack = append(stack, node.Left)
+		}
+
+		prev = node
+	}
+}
+
+func flatten2(root *common.TreeNode) {
+	helper(root, nil)
+}
+
+func helper(root *common.TreeNode, list *common.TreeNode) *common.TreeNode {
+	if root == nil {
+		return list
+	}
+
+	list = helper(root.Right, list)
+	list = helper(root.Left, list)
+	root.Left = nil
+	root.Right = list
+
+	return root
 }

@@ -2,9 +2,10 @@ package dp
 
 import (
 	"fmt"
+	"testing"
 )
 
-func MinCostTicketsTest() {
+func TestMinCostTickets(t *testing.T) {
 	testCases := []struct {
 		days     []int
 		costs    []int

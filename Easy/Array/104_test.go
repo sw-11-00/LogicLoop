@@ -1,12 +1,16 @@
 package Array
 
+import (
+	"testing"
+)
+
 type TreeNode struct {
 	Val   int
 	Left  *TreeNode
 	Right *TreeNode
 }
 
-func MaxDepthTest() {
+func TestMaxDepth(t *testing.T) {
 
 }
 
