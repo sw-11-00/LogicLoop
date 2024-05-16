@@ -63,6 +63,10 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func (n ListNode) Equal(want *ListNode) bool {
+	return compareLinkedList(&n, want)
+}
+
 func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	if head == nil {
 		return head

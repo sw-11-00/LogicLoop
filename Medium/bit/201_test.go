@@ -38,3 +38,14 @@ func rangeBitwiseAnd(left int, right int) int {
 
 	return left << shift
 }
+
+func rangeBitwiseAnd1(left int, right int) {
+	shift := 0
+	for left != right {
+		left >>= 1
+		right >>= 1
+		shift++
+	}
+
+	left <<= shift
+}
