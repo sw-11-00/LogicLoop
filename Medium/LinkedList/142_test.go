@@ -34,7 +34,7 @@ func TestDetectCycle(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			head := CreateLinkedList(tt.nums, tt.pos)
-			got := detectCycle1(head)
+			got := detectCycle(head)
 			if (got == nil && tt.want != -1) || (got != nil && got.Val != tt.want) {
 				t.Errorf("detectCycle() = %v, want %v", got, tt.want)
 			}
@@ -43,29 +43,6 @@ func TestDetectCycle(t *testing.T) {
 }
 
 func detectCycle(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
-		return nil
-	}
-
-	slow := head
-	fast := head
-	for fast != nil && fast.Next != nil {
-		slow = slow.Next
-		fast = fast.Next.Next
-		if slow == fast {
-			slow := head
-			for fast != slow {
-				fast = fast.Next
-				slow = slow.Next
-			}
-			return fast
-		}
-	}
-
-	return nil
-}
-
-func detectCycle1(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return nil
 	}
@@ -83,7 +60,7 @@ func detectCycle1(head *ListNode) *ListNode {
 				fast = fast.Next
 			}
 
-			return fast
+			return slow
 		}
 	}
 

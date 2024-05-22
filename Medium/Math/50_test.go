@@ -42,7 +42,7 @@ func myPow1(x float64, n int) float64 {
 
 func fastPow(x float64, n int) float64 {
 	if n == 0 {
-		return 1
+		return 1.0
 	}
 
 	half := fastPow(x, n/2)

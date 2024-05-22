@@ -24,7 +24,7 @@ func TestPreorderTraversal(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := preorderTraversal(tt.root)
+			result := preorderTraversal1(tt.root)
 			if !reflect.DeepEqual(result, tt.expected) {
 				t.Errorf("got %v, want %v", result, tt.expected)
 			}
@@ -39,6 +39,22 @@ func preorderTraversal(root *common.TreeNode) []int {
 }
 
 func preorderTraversalHelper(root *common.TreeNode, result *[]int) {
+	if root == nil {
+		return
+	}
+
+	*result = append(*result, root.Val)
+	preorderTraversalHelper(root.Left, result)
+	preorderTraversalHelper(root.Right, result)
+}
+
+func preorderTraversal1(root *common.TreeNode) []int {
+	var result []int
+	preorderTraversalHelper1(root, &result)
+	return result
+}
+
+func preorderTraversalHelper1(root *common.TreeNode, result *[]int) {
 	if root == nil {
 		return
 	}

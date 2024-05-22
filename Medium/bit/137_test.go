@@ -41,18 +41,13 @@ func singleNumber(nums []int) int {
 }
 
 func singleNumber3(nums []int) int {
-	var result int
+	res := int32(0)
 	for i := 0; i < 32; i++ {
-		sum := 0
+		count := int32(0)
 		for _, num := range nums {
-			sum += (num >> i) & 1
+			count += int32(num) >> i & 1
 		}
-		if sum%3 != 0 {
-			result |= 1 << i
-		}
+		res |= count % 3 << i
 	}
-	if result >= (1 << 31) {
-		result -= 1 << 32
-	}
-	return result
+	return int(res)
 }

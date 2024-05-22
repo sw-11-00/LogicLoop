@@ -60,11 +60,12 @@ func isPalindrome(head *ListNode) bool {
 		prev, slow = slow, next
 	}
 
-	for prev != nil {
-		if prev.Val != head.Val {
+	for head.Next != nil {
+		if head.Val != prev.Val {
 			return false
 		}
-		prev, head = prev.Next, head.Next
+		head = head.Next
+		prev = prev.Next
 	}
 
 	return true

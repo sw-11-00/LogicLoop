@@ -51,7 +51,7 @@ func TestMergeTwoLists(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := mergeTwoLists1(tt.list1, tt.list2)
+			got := mergeTwoLists(tt.list1, tt.list2)
 			if !isEqual(got, tt.want) {
 				t.Errorf("mergeTwoLists() = %v, want %v", got, tt.want)
 			}
@@ -97,23 +97,4 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	}
 
 	return head.Next
-}
-
-func mergeTwoLists1(list1 *ListNode, list2 *ListNode) *ListNode {
-	if list1 == nil {
-		return list2
-	}
-	if list2 == nil {
-		return list1
-	}
-
-	if list1.Val < list2.Val {
-		list1.Next = mergeTwoLists1(list1.Next, list2)
-		return list1
-	} else {
-		list2.Next = mergeTwoLists1(list1, list2.Next)
-		return list2
-	}
-
-	return nil
 }
