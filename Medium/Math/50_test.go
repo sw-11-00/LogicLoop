@@ -33,8 +33,8 @@ func TestMyPow(t *testing.T) {
 
 func myPow1(x float64, n int) float64 {
 	if n < 0 {
-		x = 1 / x
 		n = -n
+		x = 1 / x
 	}
 
 	return fastPow(x, n)
@@ -48,9 +48,9 @@ func fastPow(x float64, n int) float64 {
 	half := fastPow(x, n/2)
 	if n%2 == 0 {
 		return half * half
+	} else {
+		return half * half * x
 	}
-
-	return half * half * x
 }
 
 func closeEnough(a, b float64) bool {
