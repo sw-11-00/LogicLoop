@@ -7,14 +7,6 @@ import (
 	"LogicLoop/common"
 )
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func TestLevelOrderBottom(t *testing.T) {
 	tests := []struct {
 		name     string

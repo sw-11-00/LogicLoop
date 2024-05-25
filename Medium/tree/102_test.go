@@ -7,14 +7,6 @@ import (
 	"LogicLoop/common"
 )
 
-/**
- * Definition for a binary tree node.
- * type TreeNode struct {
- *     Val int
- *     Left *TreeNode
- *     Right *TreeNode
- * }
- */
 func TestLevelOrder(t *testing.T) {
 	tests := []struct {
 		name     string
@@ -63,7 +55,7 @@ func levelOrder(root *common.TreeNode) [][]int {
 				queue = append(queue, node.Right)
 			}
 		}
-		result = append([][]int{level}, result...)
+		result = append(result, level)
 	}
 	return result
 }

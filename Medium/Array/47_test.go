@@ -28,7 +28,7 @@ func TestPermuteUnique(t *testing.T) {
 
 func permuteUnique(nums []int) [][]int {
 	if len(nums) == 0 {
-		return [][]int{}
+		return nil
 	}
 
 	if len(nums) == 1 {
@@ -38,18 +38,14 @@ func permuteUnique(nums []int) [][]int {
 	var result [][]int
 	visited := make(map[int]bool)
 	for i := 0; i < len(nums); i++ {
-		if visited[nums[i]] {
+		if visited[nums[i]] == true {
 			continue
 		}
 		visited[nums[i]] = true
-
-		// Remove the current element from the array
-		remaining := make([]int, 0)
-		remaining = append(remaining, nums[:i]...)
-		remaining = append(remaining, nums[i+1:]...)
-
-		// Recursively call permute on the remaining elements
-		perms := permuteUnique(remaining)
+		remaing := make([]int, 0)
+		remaing = append(remaing, nums[:i]...)
+		remaing = append(remaing, nums[i+1:]...)
+		perms := permuteUnique(remaing)
 		for _, perm := range perms {
 			result = append(result, append([]int{nums[i]}, perm...))
 		}

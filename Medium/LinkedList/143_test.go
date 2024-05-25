@@ -61,14 +61,12 @@ func reorderList(head *ListNode) {
 		return
 	}
 
-	// Find the middle of the list
 	slow, fast := head, head
 	for fast != nil && fast.Next != nil {
 		slow = slow.Next
 		fast = fast.Next.Next
 	}
 
-	// Reverse the second half of the list
 	var prev *ListNode
 	curr := slow
 	for curr != nil {
@@ -78,7 +76,6 @@ func reorderList(head *ListNode) {
 		curr = next
 	}
 
-	// Merge the two halves
 	first, second := head, prev
 	for second.Next != nil {
 		firstNext := first.Next

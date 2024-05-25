@@ -68,30 +68,21 @@ func TestPartition(t *testing.T) {
 }
 
 func partition(head *ListNode, x int) *ListNode {
-	if head == nil {
-		return nil
-	}
-
-	dummy := &ListNode{Next: head}
-	slow := dummy
-	fast := dummy
-
-	for fast.Next != nil {
-		if fast.Next.Val < x {
-			if slow == fast {
-				slow = slow.Next
-				fast = fast.Next
-			} else {
-				tmp := slow.Next
-				slow.Next = fast.Next
-				fast.Next = fast.Next.Next
-				slow.Next.Next = tmp
-				slow = slow.Next
-			}
+	small := &ListNode{}
+	smallHead := small
+	large := &ListNode{}
+	largeHead := large
+	for head != nil {
+		if head.Val < x {
+			small.Next = head
+			small = small.Next
 		} else {
-			fast = fast.Next
+			large.Next = head
+			large = large.Next
 		}
+		head = head.Next
 	}
-
-	return dummy.Next
+	large.Next = nil
+	small.Next = largeHead.Next
+	return smallHead.Next
 }
