@@ -65,7 +65,6 @@ func isSameStringArray(a, b []string) bool {
 }
 
 func partition(s string) [][]string {
-
 	var res [][]string
 	var dfs func(s string, start int, path []string)
 	dfs = func(s string, start int, path []string) {
