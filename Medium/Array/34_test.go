@@ -72,6 +72,7 @@ func searchRange(nums []int, target int) []int {
 	if len(nums) == 0 {
 		return result
 	}
+	// important i <= j
 	for i, j := 0, len(nums)-1; i <= j; {
 		mid := (i + j) / 2
 		if nums[mid] > target {

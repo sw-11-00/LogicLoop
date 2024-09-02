@@ -56,6 +56,25 @@ func majorityElement(nums []int) int {
 	return cd
 }
 
+func majorityElement2(nums []int) int {
+	if len(nums) == 1 {
+		return nums[0]
+	}
+
+	numMap := make(map[int]int)
+	for _, num := range nums {
+		numMap[num]++
+	}
+
+	for _, num := range nums {
+		if numMap[num] >= len(nums)/2 {
+			return num
+		}
+	}
+
+	return 0
+}
+
 func majorityElement1(nums []int) int {
 	sort.Ints(nums)
 	return nums[len(nums)/2]

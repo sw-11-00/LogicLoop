@@ -51,15 +51,6 @@ func TestMergeSortedArray(t *testing.T) {
 }
 
 func merge1(nums1 []int, m int, nums2 []int, n int) {
-	if nums2 == nil {
-		return
-	}
-
-	if nums1 == nil {
-		copy(nums1, nums2)
-		return
-	}
-
 	nums0 := make([]int, len(nums1))
 	i := 0
 	j := 0

@@ -30,7 +30,7 @@ func TestMoveZeroes(t *testing.T) {
 
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			moveZeroes(tc.nums)
+			moveZeroes1(tc.nums)
 			if !reflect.DeepEqual(tc.nums, tc.expected) {
 				t.Errorf("Test %s failed: expected %v, got %v", tc.name, tc.expected, tc.nums)
 			}
@@ -38,18 +38,17 @@ func TestMoveZeroes(t *testing.T) {
 	}
 }
 
-func moveZeroes(nums []int) {
-	var i, j int
-	for i < len(nums) {
-		if nums[i] != 0 {
-			nums[j] = nums[i]
-			j++
+func moveZeroes1(nums []int) {
+	i := 0
+	for _, num := range nums {
+		if num != 0 {
+			nums[i] = num
+			i++
 		}
-		i++
 	}
 
-	for j < len(nums) {
-		nums[j] = 0
-		j++
+	for i < len(nums) {
+		nums[i] = 0
+		i++
 	}
 }

@@ -47,14 +47,17 @@ func TestBestTimeToBuyAndSellStock(t *testing.T) {
 }
 
 func maxProfit(prices []int) int {
-	profit := 0
-	minPrice := 1<<31 - 1
-	for _, price := range prices {
-		minPrice = Min(minPrice, price)
-		profit = Max(profit, price-minPrice)
+	minPrice := prices[0]
+	mxProfit := 0
+	for i := 1; i < len(prices); i++ {
+		if prices[i] < minPrice {
+			minPrice = prices[i]
+		}
+
+		mxProfit = max(mxProfit, prices[i]-minPrice)
 	}
 
-	return profit
+	return mxProfit
 }
 
 func Max(x, y int) int {

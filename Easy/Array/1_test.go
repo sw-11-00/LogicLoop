@@ -46,7 +46,7 @@ func TestTwoSum(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := twoSum(tt.nums, tt.target)
+			got := twoSum1(tt.nums, tt.target)
 			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("twoSum() = %v, want %v", got, tt.want)
 			}
@@ -61,6 +61,18 @@ func twoSum(nums []int, target int) []int {
 			return []int{i, j}
 		}
 		numSet[num] = i
+	}
+
+	return nil
+}
+
+func twoSum1(nums []int, target int) []int {
+	twoSumMap := make(map[int]int)
+	for i, num := range nums {
+		if j, ok := twoSumMap[target-num]; ok {
+			return []int{i, j}
+		}
+		twoSumMap[num] = i
 	}
 
 	return nil

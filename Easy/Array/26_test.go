@@ -34,7 +34,7 @@ func TestRemoveDuplicates(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := removeDuplicates1(tt.nums)
+			got := removeDuplicates(tt.nums)
 			if got != tt.want {
 				t.Errorf("removeDuplicates() = %v, want %v", got, tt.want)
 			}
@@ -50,6 +50,18 @@ func removeDuplicates1(nums []int) int {
 		}
 		nums[k] = num
 		k++
+	}
+
+	return k
+}
+
+func removeDuplicates(nums []int) int {
+	k := 0
+	for i, num := range nums {
+		if i+1 < len(nums) && nums[i] == nums[i+1] {
+			continue
+		}
+		nums[k] = num
 	}
 
 	return k
