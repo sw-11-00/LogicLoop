@@ -41,6 +41,7 @@ func TestMaxArea(t *testing.T) {
 		})
 	}
 }
+
 func maxArea(height []int) int {
 	maxArea := 0
 	left, right := 0, len(height)-1
