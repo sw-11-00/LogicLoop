@@ -28,24 +28,24 @@ func TestPermute(t *testing.T) {
 
 func permute(nums []int) [][]int {
 	if len(nums) == 0 {
-		return [][]int{}
+		return nil
 	}
 
 	if len(nums) == 1 {
 		return [][]int{nums}
 	}
 
-	var result [][]int
+	res := make([][]int, 0)
 	for i := 0; i < len(nums); i++ {
 		remaining := make([]int, 0)
 		remaining = append(remaining, nums[:i]...)
 		remaining = append(remaining, nums[i+1:]...)
-
 		perms := permute(remaining)
 		for _, perm := range perms {
-			result = append(result, append([]int{nums[i]}, perm...))
+			res = append(res, append([]int{nums[i]}, perm...))
 		}
 	}
 
-	return result
+	return res
+
 }

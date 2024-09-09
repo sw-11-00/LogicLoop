@@ -48,3 +48,26 @@ func combinationSum3(k int, n int) [][]int {
 
 	return results
 }
+
+func combinationSum31(k int, n int) [][]int {
+	var res [][]int
+	var backtrack func(start int, n int, path []int)
+
+	backtrack = func(start int, n int, path []int) {
+		if n == 0 && len(path) == k {
+			tmp := make([]int, k)
+			copy(tmp, path)
+			res = append(res, tmp)
+		}
+
+		for i := start; i <= 9; i++ {
+			if n-i >= 0 {
+				backtrack(i+1, n-i, append(path, i))
+			}
+		}
+	}
+
+	backtrack(1, n, []int{})
+
+	return res
+}

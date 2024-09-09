@@ -2,6 +2,7 @@ package Array
 
 import (
 	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -35,21 +36,20 @@ func permuteUnique(nums []int) [][]int {
 		return [][]int{nums}
 	}
 
-	var result [][]int
-	visited := make(map[int]bool)
+	res := make([][]int, 0)
+	sort.Ints(nums)
 	for i := 0; i < len(nums); i++ {
-		if visited[nums[i]] == true {
+		if i != 0 && nums[i] == nums[i-1] {
 			continue
 		}
-		visited[nums[i]] = true
-		remaing := make([]int, 0)
-		remaing = append(remaing, nums[:i]...)
-		remaing = append(remaing, nums[i+1:]...)
-		perms := permuteUnique(remaing)
+		remaining := make([]int, 0)
+		remaining = append(remaining, nums[:i]...)
+		remaining = append(remaining, nums[i+1:]...)
+		perms := permute(remaining)
 		for _, perm := range perms {
-			result = append(result, append([]int{nums[i]}, perm...))
+			res = append(res, append([]int{nums[i]}, perm...))
 		}
 	}
 
-	return result
+	return res
 }

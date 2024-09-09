@@ -44,22 +44,22 @@ func TestCombinationSum(t *testing.T) {
 
 func combinationSum(candidates []int, target int) [][]int {
 	sort.Ints(candidates)
-	var result [][]int
-	var backpack func(comb []int, start, target int)
-	backpack = func(comb []int, start, target int) {
+	var res [][]int
+
+	var backtrack func(start int, target int, path []int)
+	backtrack = func(start int, target int, path []int) {
 		if target == 0 {
-			temp := make([]int, len(comb))
-			copy(temp, comb)
-			result = append(result, temp)
-			return
+			tmp := make([]int, len(path))
+			copy(tmp, path)
+			res = append(res, tmp)
 		}
 
-		for i := start; i < len(candidates) && candidates[i] <= target; i++ {
-			backpack(append(comb, candidates[i]), i, target-candidates[i])
+		for i := start; i < len(candidates) && target-candidates[i] >= 0; i++ {
+			backtrack(i, target-candidates[i], append(path, candidates[i]))
 		}
 	}
 
-	backpack([]int{}, 0, target)
+	backtrack(0, target, []int{})
 
-	return result
+	return res
 }
